@@ -3,15 +3,13 @@ package com.arthurlage.habitflow.model;
 import lombok.Getter;
 
 @Getter
-public enum HabitStatus {
+public enum UserStatus {
     ACTIVE("Active"),
-    PAUSED("Paused"),
-    COMPLETED("Completed"),
     INACTIVE("Inactive");
 
     private final String label;
 
-    HabitStatus(String label) {
+    UserStatus(String label) {
         this.label = label;
     }
 }
