@@ -2,6 +2,7 @@ package com.arthurlage.habitflow.model;
 
 import com.arthurlage.habitflow.dto.CreateUserRequestDTO;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -20,13 +21,16 @@ public class User {
     @Column(nullable = false)
     private String name;
 
+
     @Column(nullable = false, unique = true)
     private String username;
 
+    @NotBlank(message = "Email is mandatory.")
     @Column(nullable = false, unique = true)
     private String email;
 
     @Column(nullable = false)
+    @NotBlank(message = "Password is mandatory.")
     private String password;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
@@ -43,6 +47,5 @@ public class User {
         this.username = data.username();
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder(12);
         this.password = encoder.encode(data.password());
-
     }
 }

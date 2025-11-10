@@ -4,6 +4,7 @@ import com.arthurlage.habitflow.dto.CreateUserRequestDTO;
 import com.arthurlage.habitflow.dto.CreateUserResponseDTO;
 import com.arthurlage.habitflow.model.User;
 import com.arthurlage.habitflow.service.UserService;
+import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -24,7 +25,7 @@ public class UserController {
     }
 
     @PostMapping
-    public ResponseEntity<CreateUserResponseDTO> createUser (@RequestBody CreateUserRequestDTO data) {
+    public ResponseEntity<CreateUserResponseDTO> createUser (@Valid @RequestBody CreateUserRequestDTO data) {
         this.userService.createUser(data);
         CreateUserResponseDTO body = new CreateUserResponseDTO("User created successfully");
         return ResponseEntity.ok(body);
