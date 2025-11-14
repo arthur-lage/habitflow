@@ -48,4 +48,12 @@ public class User {
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder(12);
         this.password = encoder.encode(data.password());
     }
+
+    public User(CreateUserRequestDTO data, String password) {
+        this.email = data.email();
+        this.name = data.name();
+        this.username = data.username();
+        this.password = password;
+    }
+
 }
