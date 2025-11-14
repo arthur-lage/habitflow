@@ -2,6 +2,8 @@ package com.arthurlage.habitflow.controller;
 
 import com.arthurlage.habitflow.dto.CreateUserRequestDTO;
 import com.arthurlage.habitflow.dto.CreateUserResponseDTO;
+import com.arthurlage.habitflow.dto.LoginRequestDTO;
+import com.arthurlage.habitflow.dto.LoginResponseDTO;
 import com.arthurlage.habitflow.model.User;
 import com.arthurlage.habitflow.service.UserService;
 import jakarta.validation.Valid;
@@ -26,8 +28,15 @@ public class UserController {
 
     @PostMapping
     public ResponseEntity<CreateUserResponseDTO> createUser (@Valid @RequestBody CreateUserRequestDTO data) {
-        this.userService.createUser(data);
-        CreateUserResponseDTO body = new CreateUserResponseDTO("User created successfully");
+        String token = this.userService.createUser(data);
+        CreateUserResponseDTO body = new CreateUserResponseDTO("User created successfully", token);
+        return ResponseEntity.ok(body);
+    }
+
+    @PostMapping("/login")
+    public ResponseEntity<LoginResponseDTO> login (@Valid @RequestBody LoginRequestDTO loginRequestDTO) {
+        String token = this.userService.login(loginRequestDTO);
+        LoginResponseDTO body = new LoginResponseDTO("Login was successful.", token);
         return ResponseEntity.ok(body);
     }
 }
