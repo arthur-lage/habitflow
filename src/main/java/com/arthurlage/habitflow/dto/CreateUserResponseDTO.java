@@ -1,4 +1,4 @@
 package com.arthurlage.habitflow.dto;
 
-public record CreateUserResponseDTO(String message) {
+public record CreateUserResponseDTO(String message, String token) {
 }
