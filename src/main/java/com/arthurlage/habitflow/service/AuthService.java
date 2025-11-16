@@ -6,7 +6,6 @@ import com.arthurlage.habitflow.exception.InvalidCredentialsException;
 import com.arthurlage.habitflow.exception.UsernameOrEmailTakenException;
 import com.arthurlage.habitflow.model.User;
 import com.arthurlage.habitflow.repository.UserRepository;
-import com.arthurlage.habitflow.security.JwtService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -14,7 +13,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class UserService {
+public class AuthService {
     private final UserRepository userRepository;
 
     @Autowired
@@ -22,7 +21,7 @@ public class UserService {
     @Autowired
     private JwtService jwtService;
 
-    public UserService(UserRepository userRepository) {
+    public AuthService(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
 
