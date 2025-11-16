@@ -1,6 +1,7 @@
 package com.arthurlage.habitflow.model;
 
 import com.arthurlage.habitflow.dto.CreateUserRequestDTO;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
@@ -8,6 +9,7 @@ import lombok.NoArgsConstructor;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -33,8 +35,9 @@ public class User {
     @NotBlank(message = "Password is mandatory.")
     private String password;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Habit> habits;
+    private List<Habit> habits = new ArrayList<>();
 
     private LocalDateTime createdAt = LocalDateTime.now();
 

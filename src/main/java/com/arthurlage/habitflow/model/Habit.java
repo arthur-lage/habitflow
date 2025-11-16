@@ -1,5 +1,6 @@
 package com.arthurlage.habitflow.model;
 
+import com.arthurlage.habitflow.dto.CreateHabitRequestDTO;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
@@ -38,4 +39,13 @@ public class Habit {
 
     @Enumerated(EnumType.STRING)
     private HabitStatus status = HabitStatus.ACTIVE;
+
+    public Habit(CreateHabitRequestDTO createHabitRequestDTO, User user) {
+        this.name = createHabitRequestDTO.name();
+        if (createHabitRequestDTO.description() != null && !createHabitRequestDTO.description().isBlank()) this.description = createHabitRequestDTO.description();
+        if (createHabitRequestDTO.category() != null && !createHabitRequestDTO.category().isBlank()) this.category = createHabitRequestDTO.category();
+        if (createHabitRequestDTO.motivation() != null && !createHabitRequestDTO.motivation().isBlank()) this.motivation = createHabitRequestDTO.motivation();
+        this.weeklyFrequency = createHabitRequestDTO.weekdays();
+        this.user = user;
+    }
 }
